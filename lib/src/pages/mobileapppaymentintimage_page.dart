@@ -1,0 +1,57 @@
+import 'package:flutter/material.dart';
+import 'package:gsthongbai1app/src/models/mobileapppaymentint_response.dart';
+import 'package:gsthongbai1app/src/utils/constant.dart';
+
+class MobileAppPaymentIntImagePage extends StatelessWidget {
+  final MobileAppPaymentIntResponse post;
+
+  const MobileAppPaymentIntImagePage({Key key, @required this.post})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "${post.type} ${post.billId}",
+          style: TextStyle(color: Constant.FONT_COLOR_MENU),
+        ),
+        iconTheme: IconThemeData(
+          color: Constant.FONT_COLOR_MENU,
+        ),
+        backgroundColor: Colors.white,
+      ),
+      body: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              child: ListView(
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                      vertical: 0.0,
+                      horizontal: 0.0,
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    child: ClipRect(
+                      child: Image.network(post.picLink),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      "${Constant.formatNumber.format(post.price)}  ${post.status}",
+                      style: TextStyle(
+                          fontSize: 20, color: Constant.FONT_COLOR_MENU),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
