@@ -77,7 +77,7 @@ class _SearchTimeLinePageState extends State<SearchTimeLinePage> {
                     child: Text(
                       "ค้นหา",
                       style: TextStyle(
-                          color: Constant.FONT_COLOR,
+                          color: Color(0xFFf0e19b),
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold),
                     ),

@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gsthongbai1app/src/models/customer_response.dart';
-import 'package:gsthongbai1app/src/pages/custidscreen_page.dart';
-import 'package:gsthongbai1app/src/pages/otpscreen_page.dart';
-import 'package:gsthongbai1app/src/themes/login_theme.dart';
+import 'package:gsthongbai1app/src/pages/passwordscreen_page.dart';
+import 'package:gsthongbai1app/src/pages/readbeforesaving_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:gsthongbai1app/src/utils/constant.dart';
+import 'package:gsthongbai1app/src/pages/readbeforesaving_page.dart';
 
 class PhoneLoginPage extends StatefulWidget {
   PhoneLoginPage({Key key}) : super(key: key);
@@ -35,6 +35,21 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
         isValid = false;
       });
     }
+  }
+
+@override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+       showDialog(
+      context: context,
+      builder: (context) {
+        return readbeforesaving(mdFileName: 'ReadBeforeSaving.md');
+      },
+    );
+    });
+
+   
   }
 
   @override
@@ -65,7 +80,7 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
                             color: Constant.FONT_COLOR_MENU),
                       ),
                       Text(
-                        'ใส่หมายเลขโทรศัพท์เพื่อส่ง OTP',
+                        'ใส่หมายเลขโทรศัพท์เพื่อเข้าสู่ระบบ',
                         style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.normal,
@@ -96,136 +111,52 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
                           },
                         ),
                       ),
-                      isValid
-                      ?Container(
-                        padding: EdgeInsets.all(16),
-                        child: Center(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.85,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Constant.PRIMARY_COLOR,
-                                  Constant.SECONDARY_COLOR,
-                                ],
-                              ),
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                  color: Constant.PRIMARY_COLOR,
-                                  offset: Offset(1.0, 6.0),
-                                  blurRadius: 20.0,
+                      !isValid
+                          ? SizedBox(height: 10)
+                          : Container(
+                              padding: EdgeInsets.all(16),
+                              child: Center(
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.85,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Constant.PRIMARY_COLOR,
+                                        Constant.SECONDARY_COLOR,
+                                      ],
+                                    ),
+                                  ),
+                                  child: TextButton(
+                                    style: ButtonStyle(
+                                      foregroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.white),
+                                    ),
+                                    child: Text(
+                                      "เข้าสู่ระบบ",
+                                      style: TextStyle(
+                                          color: Color(0xFFf0e19b),
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    // ignore: missing_return
+                                    onPressed: () {
+                                      if (isValid) {
+                                        print(_phoneNumberController.text);
+                                        custIDGet = "";
+                                        fetchCustomerID();
+                                      } else {
+                                        validate(state);
+                                      }
+                                    },
+                                    // padding: EdgeInsets.all(16.0),
+                                  ),
                                 ),
-                                BoxShadow(
-                                  color: Constant.SECONDARY_COLOR,
-                                  offset: Offset(1.0, 6.0),
-                                  blurRadius: 20.0,
-                                ),
-                              ],
+                              ),
                             ),
-                            child: TextButton(
-                              style: ButtonStyle(
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.white),
-                              ),
-                              child: Text(
-                                !isValid ? "ใส่หมายเลขโทรศัพท์" : "ส่ง OTP",
-                                style: TextStyle(
-                                    color: Color(0xFFFFFFFF),
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              // ignore: missing_return
-                              onPressed: () {
-                                if (isValid) {
-                                  print(_phoneNumberController.text);
-                                  custIDGet = "";
-                                  fetchCustomer();
-                                } else {
-                                  validate(state);
-                                }
-                              },
-                              // padding: EdgeInsets.all(16.0),
-                            ),
-                          ),
-                        ),
-                      )
-                      :Text(""),
-                      isValid
-                      ?Container(
-                        child: 
-                        Center(
-                          child: Text(
-                            "หรือ",
-                            style: TextStyle(
-                                color: Constant.FONT_COLOR_MENU,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      )
-                      :Text(""),
-                      isValid
-                      ?Container(
-                        padding: EdgeInsets.all(16),
-                        child: Center(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.85,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Constant.PRIMARY_COLOR,
-                                  Constant.SECONDARY_COLOR,
-                                ],
-                              ),
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                  color: Constant.PRIMARY_COLOR,
-                                  offset: Offset(1.0, 6.0),
-                                  blurRadius: 20.0,
-                                ),
-                                BoxShadow(
-                                  color: Constant.SECONDARY_COLOR,
-                                  offset: Offset(1.0, 6.0),
-                                  blurRadius: 20.0,
-                                ),
-                              ],
-                            ),
-                            child: TextButton(
-                              style: ButtonStyle(
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.white),
-                              ),
-                              child: Text(
-                                !isValid
-                                    ? "ใส่หมายเลขโทรศัพท์"
-                                    : "เข้าสู่ระบบโดยรหัสลูกค้า",
-                                style: TextStyle(
-                                    color: Color(0xFFFFFFFF),
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              // ignore: missing_return
-                              onPressed: () {
-                                if (isValid) {
-                                  print(_phoneNumberController.text);
-                                  custIDGet = "";
-                                  fetchCustomerID();
-                                } else {
-                                  validate(state);
-                                }
-                              },
-                              // padding: EdgeInsets.all(16.0),
-                            ),
-                          ),
-                        ),
-                      )
-                      :Text(""),
                     ],
                   ),
                 );
@@ -252,44 +183,6 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
     );
   }
 
-  Future<CustomerResponse> fetchCustomer() async {
-    Map<String, String> requestHeaders = {
-      'Content-type': 'application/json',
-      'serverId': Constant.ServerId,
-      'customerId': Constant.CustomerId
-    };
-
-    final response = await http.get(
-        Uri.parse('${Constant.API}/Customer/${_phoneNumberController.text}'),
-        headers: requestHeaders);
-    print("fetchCustomer : ${_phoneNumberController.text}");
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      final CustomerResponse customerResponse =
-          CustomerResponse.fromJson(json.decode(response.body));
-      print("fetchCustomer CustID" + customerResponse.custId);
-
-      custIDGet = customerResponse.custId;
-      Constant.CUSTIDTEMP = customerResponse.custId;
-      Constant.CUSTNAMETEMP = customerResponse.custName;
-      Constant.CUSTTELTEMP = customerResponse.custTel;
-
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => OTPScreenPage(
-              mobileNumber: _phoneNumberController.text,
-            ),
-          ));
-    } else {
-      showDialogInvid();
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load fetchCustomer');
-    }
-  }
-
   Future<CustomerResponse> fetchCustomerID() async {
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
@@ -312,11 +205,14 @@ class _PhoneLoginPageState extends State<PhoneLoginPage> {
       Constant.CUSTIDTEMP = customerResponse.custId;
       Constant.CUSTNAMETEMP = customerResponse.custName;
       Constant.CUSTTELTEMP = customerResponse.custTel;
+      Constant.CUSTTHAIIDTEMP = customerResponse.custThaiId;
+      Constant.MEMBERIDTEMP = customerResponse.memberId;
+      Constant.MOBILEAPPPASSWORDTEMP = customerResponse.mobileAppPassword;
 
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => CustIDScreenPage(
+            builder: (context) => PasswordScreenPage(
               mobileNumber: _phoneNumberController.text,
             ),
           ));

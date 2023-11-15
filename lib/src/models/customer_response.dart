@@ -17,6 +17,7 @@ class CustomerResponse {
   double custPoint;
   double custUsePoint;
   double custRemainPoint;
+  String mobileAppPassword;
 
   CustomerResponse({
     this.custId,
@@ -27,6 +28,7 @@ class CustomerResponse {
     this.custPoint,
     this.custUsePoint,
     this.custRemainPoint,
+    this.mobileAppPassword,
   });
 
   factory CustomerResponse.fromJson(Map<String, dynamic> json) =>
@@ -44,6 +46,8 @@ class CustomerResponse {
         custRemainPoint: json["custRemainPoint"] == null
             ? null
             : json["custRemainPoint"].toDouble(),
+            mobileAppPassword:
+            json["mobileAppPassword"] == null ? "" : json["mobileAppPassword"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -55,5 +59,6 @@ class CustomerResponse {
         "custPoint": custPoint,
         "custUsePoint": custUsePoint,
         "custRemainPoint": custRemainPoint,
+        "mobileAppPassword": mobileAppPassword,
       };
 }

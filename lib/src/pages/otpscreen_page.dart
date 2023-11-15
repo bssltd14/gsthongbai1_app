@@ -88,18 +88,18 @@ class _OTPScreenPageState extends State<OTPScreenPage> {
                       Constant.SECONDARY_COLOR,
                     ],
                   ),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: Constant.PRIMARY_COLOR,
-                      offset: Offset(1.0, 6.0),
-                      blurRadius: 20.0,
-                    ),
-                    BoxShadow(
-                      color: Constant.SECONDARY_COLOR,
-                      offset: Offset(1.0, 6.0),
-                      blurRadius: 20.0,
-                    ),
-                  ],
+                  // boxShadow: <BoxShadow>[
+                  //   BoxShadow(
+                  //     color: Constant.PRIMARY_COLOR,
+                  //     offset: Offset(1.0, 6.0),
+                  //     blurRadius: 20.0,
+                  //   ),
+                  //   BoxShadow(
+                  //     color: Constant.SECONDARY_COLOR,
+                  //     offset: Offset(1.0, 6.0),
+                  //     blurRadius: 20.0,
+                  //   ),
+                  // ],
                 ),
                 child: TextButton(
                   style: ButtonStyle(
@@ -111,7 +111,7 @@ class _OTPScreenPageState extends State<OTPScreenPage> {
                   child: Text(
                     "ยืนยัน OTP",
                     style: TextStyle(
-                        color: Color(0xFFFFFFFF),
+                        color: Color(0xFFf0e19b),
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold),
                   ),

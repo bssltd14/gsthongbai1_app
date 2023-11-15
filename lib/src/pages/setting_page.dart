@@ -5,6 +5,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsthongbai1app/src/pages/phonelogin_page.dart';
 import 'package:gsthongbai1app/src/utils/constant.dart';
+import 'package:gsthongbai1app/src/pages/readbeforesaving_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -19,7 +20,7 @@ class _SettingPageState extends State<SettingPage> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/bg-home3.png"),
+          image: AssetImage("assets/images/bg-white.png"),
           fit: BoxFit.cover,
         ),
       ),
@@ -61,7 +62,7 @@ class _SettingPageState extends State<SettingPage> {
             height: 130,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/images/logo-3.png"))),
+                    image: AssetImage("assets/images/logo.png"))),
           ),
         ],
       ),
@@ -78,7 +79,7 @@ class _SettingPageState extends State<SettingPage> {
         height: 20,
       ),
       Text(
-        "ห้างทองขวัญกมล",
+        "ห้างทองทองใบ ๑ นนทบุรี",
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: 24,
@@ -89,25 +90,24 @@ class _SettingPageState extends State<SettingPage> {
         height: 10,
       ),
       Text(
-        "เวลาเปิด - ปิด 09.00-19.30 น. (เปิดทุกวัน)",
+        "729 ถ.พิบูลสงคราม ต.สวนใหญ่ อ.เมือง จ.นนทบุรี 11000",
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 18,
+          color: Constant.FONT_COLOR_MENU,
+        ),
+      ),
+      SizedBox(
+        height: 10,
+      ),
+      Text(
+        "เวลาเปิด - ปิด 10.00-18.00 น.",
+        style: TextStyle(
+          fontSize: 18,
           color: Constant.FONT_COLOR_MENU,
         ),
       ),
       SizedBox(
         height: 30,
-      ),
-      Text(
-        "สาขา 1 : ตลาดเสาสูง บ่อวิน",
-        style: TextStyle(
-          fontSize: 22,
-          color: Constant.FONT_COLOR_MENU,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      SizedBox(
-        height: 5,
       ),
       InkWell(
         onTap: () {
@@ -125,70 +125,9 @@ class _SettingPageState extends State<SettingPage> {
               ),
               SizedBox(width: 8),
               Text(
-                "ห้างทองขวัญกมล ตลาดเสาสูง บ่อวิน - KKM.Gold",
+                "ห้างทอง ทองใบ ๑ นนทบุรี ",
                 style: TextStyle(
                   fontSize: 20,
-                  color: Constant.FONT_COLOR_MENU,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      SizedBox(
-        height: 5,
-      ),
-      InkWell(
-        onTap: () {
-          //todo
-          _launchLine();
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 3),
-          child: Row(
-            children: <Widget>[
-              Icon(
-                FontAwesomeIcons.line,
-                color: Colors.green[600],
-                size: 20,
-              ),
-              SizedBox(width: 10),
-              Text(
-                "@kkmgold",
-                style: TextStyle(
-                  fontSize: 22,
-                  color: Constant.FONT_COLOR_MENU,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      SizedBox(
-        height: 5,
-      ),
-      InkWell(
-        onTap: () {
-          _launchTiktok();
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 3),
-          child: Row(
-            children: [
-              Container(
-                //margin: const EdgeInsets.all(40.0),
-                width: 20,
-                height: 20,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/images/tiktok1.png"))),
-              ),
-              SizedBox(width: 10),
-              Text(
-                "@thongbai1.gold",
-                style: TextStyle(
-                  fontSize: 20,
-                  // fontWeight: FontWeight.bold,
                   color: Constant.FONT_COLOR_MENU,
                 ),
               ),
@@ -225,102 +164,6 @@ class _SettingPageState extends State<SettingPage> {
       ),
       SizedBox(
         height: 20,
-      ),
-      Text(
-        "สาขา 2 : ตลาดลานปูน มาบตาพุด",
-        style: TextStyle(
-          fontSize: 22,
-          color: Constant.FONT_COLOR_MENU,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      SizedBox(
-        height: 5,
-      ),
-      InkWell(
-        onTap: () {
-          //todo
-          _launchFacebook2();
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 3),
-          child: Row(
-            children: <Widget>[
-              Icon(
-                FontAwesomeIcons.facebook,
-                color: Colors.blue,
-                size: 20,
-              ),
-              SizedBox(width: 8),
-              Text(
-                "ห้างทองขวัญกมล ตลาดลานปูน มาบตาพุด",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Constant.FONT_COLOR_MENU,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      SizedBox(
-        height: 5,
-      ),
-      InkWell(
-        onTap: () {
-          //todo
-          _launchLine2();
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 3),
-          child: Row(
-            children: <Widget>[
-              Icon(
-                FontAwesomeIcons.line,
-                color: Colors.green[600],
-                size: 20,
-              ),
-              SizedBox(width: 10),
-              Text(
-                "@kkmgold2",
-                style: TextStyle(
-                  fontSize: 22,
-                  color: Constant.FONT_COLOR_MENU,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      SizedBox(
-        height: 5,
-      ),
-      InkWell(
-        onTap: () {
-          _makePhoneCall('tel:0946948864');
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 3),
-          child: Row(
-            children: <Widget>[
-              Icon(
-                FontAwesomeIcons.mobileAlt,
-                size: 20,
-              ),
-              SizedBox(width: 8),
-              Text(
-                "094-694-8664",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Constant.FONT_COLOR_MENU,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      SizedBox(
-        height: 10,
       ),
     ];
   }
@@ -456,13 +299,14 @@ class _SettingPageState extends State<SettingPage> {
   _launchFacebook() async {
     String fbProtocolUrl;
     if (Platform.isIOS) {
-      fbProtocolUrl = "fb://profile/100075430671206";
+      fbProtocolUrl = "fb://profile/100057361603649";
     } else {
-      fbProtocolUrl = "fb://page/100075430671206";
+      fbProtocolUrl = "fb://page/100057361603649";
     }
 
 //    String fallbackUrl = 'https://www.facebook.com/page_name';
-    String fallbackUrl = "https://www.facebook.com/profile.php?id=100075430671206";
+    String fallbackUrl =
+        "https://www.facebook.com/profile.php?id=100075430671206";
     try {
       bool launched = await launch(fbProtocolUrl, forceSafariVC: false);
 
@@ -474,7 +318,7 @@ class _SettingPageState extends State<SettingPage> {
     }
   }
 
-   _launchFacebook2() async {
+  _launchFacebook2() async {
     String fbProtocolUrl;
     if (Platform.isIOS) {
       fbProtocolUrl = "fb://profile/100086191411782";
@@ -483,7 +327,8 @@ class _SettingPageState extends State<SettingPage> {
     }
 
 //    String fallbackUrl = 'https://www.facebook.com/page_name';
-    String fallbackUrl = "https://www.facebook.com/profile.php?id=100086191411782/";
+    String fallbackUrl =
+        "https://www.facebook.com/profile.php?id=100086191411782/";
     try {
       bool launched = await launch(fbProtocolUrl, forceSafariVC: false);
 

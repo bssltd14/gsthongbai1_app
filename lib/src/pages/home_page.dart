@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
     TimeLinePage(),
     SavingMtPage(),
     // PointPage(),
-    PawnPage(),
+    // PawnPage(),
     SettingPage(),
   ];
 
@@ -79,11 +79,11 @@ class _HomePageState extends State<HomePage> {
           //     icon: Icon(Icons.control_point),
           //     inactiveColor: Color(0xFF990000),
           //     activeColor: Color(0xFF990000)),
-          BottomNavyBarItem(
-              title: Text('ขายฝาก'),
-              icon: Icon(Icons.account_balance),
-              inactiveColor: Color(0xFF990000),
-              activeColor: Color(0xFF990000)),
+          // BottomNavyBarItem(
+          //     title: Text('ขายฝาก'),
+          //     icon: Icon(Icons.account_balance),
+          //     inactiveColor: Color(0xFF990000),
+          //     activeColor: Color(0xFF990000)),
           BottomNavyBarItem(
               title: Text('ติดต่อเรา'),
               icon: Icon(Icons.menu),

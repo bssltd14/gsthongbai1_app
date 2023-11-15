@@ -107,18 +107,18 @@ class _CustIDScreenPageState extends State<CustIDScreenPage> {
                         Constant.SECONDARY_COLOR,
                       ],
                     ),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Constant.PRIMARY_COLOR,
-                        offset: Offset(1.0, 6.0),
-                        blurRadius: 20.0,
-                      ),
-                      BoxShadow(
-                        color: Constant.SECONDARY_COLOR,
-                        offset: Offset(1.0, 6.0),
-                        blurRadius: 20.0,
-                      ),
-                    ],
+                    // boxShadow: <BoxShadow>[
+                    //   BoxShadow(
+                    //     color: Constant.PRIMARY_COLOR,
+                    //     offset: Offset(1.0, 6.0),
+                    //     blurRadius: 20.0,
+                    //   ),
+                    //   BoxShadow(
+                    //     color: Constant.SECONDARY_COLOR,
+                    //     offset: Offset(1.0, 6.0),
+                    //     blurRadius: 20.0,
+                    //   ),
+                    // ],
                   ),
                   child: TextButton(
                     style: ButtonStyle(

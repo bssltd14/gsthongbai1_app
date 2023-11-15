@@ -24,7 +24,7 @@ class _SavingMtPage extends State<SavingMtPage> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/bg-home3.png"),
+          image: AssetImage("assets/images/bg-home.png"),
           fit: BoxFit.cover,
         ),
       ),
@@ -96,7 +96,7 @@ class _SavingMtPage extends State<SavingMtPage> {
                 child: Text("ไม่พบข้อมูลออมทอง",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Constant.FONT_COLOR_MENU,
+                        color: Colors.white,
                         fontSize: 18),
                     textAlign: TextAlign.right),
               );
@@ -220,7 +220,7 @@ class ItemTileSavingMt extends StatelessWidget {
                     IconButton(
                         icon: Icon(
                           Icons.add_circle,
-                          color: Color(0xFFFFFFFF),
+                          color: Color(0xFFf0e19b),
                         ),
                         onPressed: () {
                         Constant.MobileAppPaymentBranchName = item.branchName;
@@ -303,22 +303,22 @@ class ItemTileSavingMt extends StatelessWidget {
           Text(
             "สาขาที่ทำรายการ :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF),fontSize: 18),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b),fontSize: 18),
           ),
           Text(
             "เลขที่ออมทอง  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 18),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 18),
           ),
           Text(
             "วันที่เปิดออม  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 18),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 18),
           ),
           Text(
             "ยอดออมทอง  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 18),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 18),
           ),
           
           SizedBox(height: 5),
@@ -338,22 +338,22 @@ class ItemTileSavingMt extends StatelessWidget {
           Text(
             " ${item.branchName}",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF),fontSize: 18),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b),fontSize: 18),
           ),
           Text(
             "  ${item.savingId}",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 18),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 18),
           ),
           Text(
             "  ${Constant.formatDate.format(item.savingDate)}",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 18),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 18),
           ),
           Text(
             "  ${Constant.formatNumber.format(item.totalPay)} บาท",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 18),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 18),
           ),
           
           

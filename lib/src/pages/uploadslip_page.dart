@@ -79,7 +79,7 @@ class _UploadSlipPagePageState extends State<UploadSlipPagePage> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/bg-home2.png"),
+          image: AssetImage("assets/images/bg-white.png"),
           fit: BoxFit.cover,
         ),
       ),
@@ -226,7 +226,7 @@ class _UploadSlipPagePageState extends State<UploadSlipPagePage> {
                           child: Text(
                             "เลือกรูป",
                             style: TextStyle(
-                                color: Color(0xFFFFFFFF),
+                                color: Color(0xFFf0e19b),
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -274,7 +274,7 @@ class _UploadSlipPagePageState extends State<UploadSlipPagePage> {
                           child: Text(
                             "ถ่ายรูป",
                             style: TextStyle(
-                                color: Color(0xFFFFFFFF),
+                                color: Color(0xFFf0e19b),
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -349,7 +349,7 @@ class _UploadSlipPagePageState extends State<UploadSlipPagePage> {
                           child: Text(
                             "วันที่โอน ${Constant.formatDate.format(Constant.SelectDate)}",
                             style: TextStyle(
-                                color: Color(0xFFFFFFFF),
+                                color: Color(0xFFf0e19b),
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -424,7 +424,7 @@ class _UploadSlipPagePageState extends State<UploadSlipPagePage> {
                           child: Text(
                             "บันทึกข้อมูล",
                             style: TextStyle(
-                                color: Color(0xFFFFFFFF),
+                                color: Color(0xFFf0e19b),
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -744,7 +744,7 @@ class _UploadSlipPagePageState extends State<UploadSlipPagePage> {
             child: Column(
               children: [
                 Text(
-                  "กรุณารออัพเดทจากทางร้าน ภายใน 24 ชั่วโมง",
+                  "ข้อมูลการออมทองจะอัพเดทภายในเวลา 15.00 ของวันถัดไป",
                   style: TextStyle(
                       fontSize: 15,
                       height: 1.2,
@@ -762,7 +762,7 @@ class _UploadSlipPagePageState extends State<UploadSlipPagePage> {
                   height: 5,
                 ),
                 Text(
-                  "* หากเกิน 24 ชั่งโมงกรุณาติดต่อทางร้าน",
+                  "* หากเลยกำหนดกรุณาติดต่อร้านค้า",
                   style:
                       TextStyle(fontSize: 15, height: 1.2, color: Colors.red),
                 ),

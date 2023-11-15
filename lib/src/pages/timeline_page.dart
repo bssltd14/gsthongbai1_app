@@ -134,7 +134,7 @@ class _TimeLinePageState extends State<TimeLinePage> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/bg-home3.png"),
+          image: AssetImage("assets/images/bg-home.png"),
           fit: BoxFit.fill,
         ),
       ),
@@ -165,7 +165,7 @@ class _TimeLinePageState extends State<TimeLinePage> {
                           height: 110,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage("assets/images/logo-3.png"))),
+                                  image: AssetImage("assets/images/logo.png"))),
                         ),
                       ),
                       Padding(
@@ -331,7 +331,7 @@ class _TimeLinePageState extends State<TimeLinePage> {
                             "ราคาทองคำแท่ง",
                             style: TextStyle(
                               fontSize: 20,
-                              color: Colors.white,
+                              color: Color(0xFFf0e19b),
                               //color: Colors.blueGrey,
                             ),
                           ),
@@ -342,7 +342,7 @@ class _TimeLinePageState extends State<TimeLinePage> {
                             DateFormat('dd/MM/yyyy').format(DateTime.now()),
                             style: TextStyle(
                               fontSize: 20,
-                              color: Colors.white,
+                              color: Color(0xFFf0e19b),
                               //color: Colors.blueGrey,
                             ),
                           ),
@@ -372,7 +372,7 @@ class _TimeLinePageState extends State<TimeLinePage> {
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: Color(0xFFf0e19b),
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(15)),
                                     ),
@@ -403,7 +403,7 @@ class _TimeLinePageState extends State<TimeLinePage> {
                                               Text(
                                                 "ขายออก",
                                                 style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: Color(0xFFf0e19b),
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.bold,
                                                 ),
@@ -435,7 +435,7 @@ class _TimeLinePageState extends State<TimeLinePage> {
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: Color(0xFFf0e19b),
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(15)),
                                     ),
@@ -466,7 +466,7 @@ class _TimeLinePageState extends State<TimeLinePage> {
                                               Text(
                                                 "รับซื้อ",
                                                 style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: Color(0xFFf0e19b),
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.bold,
                                                 ),
@@ -718,11 +718,11 @@ class PostWidget extends StatelessWidget {
           gradient: LinearGradient(
             colors: index % 2 == 0
 
-               ? <Color>[Color(0xFF925f26), Color(0xFFe6ba57)]
-               : <Color>[Color(0xFFe6ba57), Color(0xFF925f26)],
+              //  ? <Color>[Color(0xFF925f26), Color(0xFFe6ba57)]
+              //  : <Color>[Color(0xFFe6ba57), Color(0xFF925f26)],
 
-                // ? <Color>[Constant.PRIMARY_COLOR, Constant.SECONDARY_COLOR]
-                // : <Color>[Constant.SECONDARY_COLOR, Constant.PRIMARY_COLOR],
+                ? <Color>[Constant.PRIMARY_COLOR, Constant.SECONDARY_COLOR]
+                : <Color>[Constant.SECONDARY_COLOR, Constant.PRIMARY_COLOR],
           ),
           borderRadius: BorderRadius.circular(20)),
       child: InkWell(
@@ -770,7 +770,7 @@ class PostWidget extends StatelessWidget {
             children: <Widget>[
               ListTile(
                 title: Text(post.mobileAppPromotionName,
-                    style: TextStyle(fontSize: 20, color: Color(0xFFFFFFFF))),
+                    style: TextStyle(fontSize: 20, color: Color(0xFFf0e19b))),
 //        ,
 //        style: TextStyle(
 //        fontWeight: FontWeight.bold,
@@ -778,14 +778,14 @@ class PostWidget extends StatelessWidget {
 //        fontSize: 18
 
                 subtitle: Text(post.mobileAppPromotionDetail,
-                    style: TextStyle(fontSize: 16, color: Color(0xFFFFFFFF))),
+                    style: TextStyle(fontSize: 16, color: Color(0xFFf0e19b))),
               ),
               SizedBox(
                 height: 50,
               ),
               Text(
                   "${Constant.formatDate.format(post.mobileAppPromotionDate)}     ",
-                  style: TextStyle(fontSize: 12, color: Color(0xFFFFFFFF))),
+                  style: TextStyle(fontSize: 12, color: Color(0xFFf0e19b))),
 //              Text(post.mobileAppPromotionDetail),
 //   Text(post.mobileAppPromotionDate),
             ]));

@@ -162,14 +162,14 @@ class _SavingPage extends State<SavingPage> {
                   Constant.formatNumber.format(_totalSaving), //todo
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFFFFFFFF),
+                      color: Color(0xFFf0e19b),
                       fontSize: 80),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 180, top: 20),
                   child: Text(
                     _savingText, //todo
-                    style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 16),
+                    style: TextStyle(color: Color(0xFFf0e19b), fontSize: 16),
                   ),
                 ),
               ],
@@ -226,7 +226,7 @@ class _SavingPage extends State<SavingPage> {
                                     child: Text(
                                       "ลำดับ",
                                       style: TextStyle(
-                                          color: Color(0xFFFFFFFF),
+                                          color: Color(0xFFf0e19b),
                                           fontSize: 16),
                                       textAlign: TextAlign.right,
                                     ),
@@ -239,7 +239,7 @@ class _SavingPage extends State<SavingPage> {
                                         0.29,
                                     child: Text("วัน/เดือน/ปี เวลา",
                                         style: TextStyle(
-                                            color: Color(0xFFFFFFFF),
+                                            color: Color(0xFFf0e19b),
                                             fontSize: 16),
                                         textAlign: TextAlign.left),
                                   ),
@@ -248,7 +248,7 @@ class _SavingPage extends State<SavingPage> {
                                         0.25,
                                     child: Text("จำนวนเงิน",
                                         style: TextStyle(
-                                            color: Color(0xFFFFFFFF),
+                                            color: Color(0xFFf0e19b),
                                             fontSize: 16),
                                         textAlign: TextAlign.right),
                                   ),
@@ -257,7 +257,7 @@ class _SavingPage extends State<SavingPage> {
                                         0.20,
                                     child: Text("ยอดสะสม",
                                         style: TextStyle(
-                                            color: Color(0xFFFFFFFF),
+                                            color: Color(0xFFf0e19b),
                                             fontSize: 16),
                                         textAlign: TextAlign.right),
                                   ),
@@ -320,7 +320,7 @@ class ItemTile extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.15,
                 child: Text(
                   '${item.no}',
-                  style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 16),
+                  style: TextStyle(color: Color(0xFFf0e19b), fontSize: 16),
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -329,19 +329,19 @@ class ItemTile extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.40,
                 child: Text(
                     "${Constant.formatDate.format(item.payDate)} ${item.prTime}",
-                    style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 16),
+                    style: TextStyle(color: Color(0xFFf0e19b), fontSize: 16),
                     textAlign: TextAlign.left),
               ),
               Container(
                 width: MediaQuery.of(context).size.width * 0.15,
                 child: Text(Constant.formatNumber.format(item.amountPay),
-                    style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 16),
+                    style: TextStyle(color: Color(0xFFf0e19b), fontSize: 16),
                     textAlign: TextAlign.right),
               ),
               Container(
                 width: MediaQuery.of(context).size.width * 0.20,
                 child: Text(Constant.formatNumber.format(item.totalAmountPay),
-                    style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 16),
+                    style: TextStyle(color: Color(0xFFf0e19b), fontSize: 16),
                     textAlign: TextAlign.right),
               ),
               SizedBox(width: MediaQuery.of(context).size.width * 0.05),

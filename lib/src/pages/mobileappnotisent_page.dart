@@ -129,7 +129,7 @@ class _MobileAppNotiSentPageState extends State<MobileAppNotiSentPage> {
                 child: Text("ไม่พบข้อมูล",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Constant.FONT_COLOR_PAGE,
+                        color: Constant.FONT_COLOR_MENU,
                         fontSize: 18),
                     textAlign: TextAlign.right),
               );

@@ -56,6 +56,8 @@ class Constant {
   static const String CUSTID_PREF = "custid";
   static const String CUSTNAME_PREF = "custname";
   static const String CUSTTEL_PREF = "custtel";
+  static const String CUSTTHAIID_PREF = "custthaiid";
+  static const String MEMBERID_PREF = "memberid";
 
 //  Date Number
   static var formatDate = new DateFormat("dd/MM/yyyy");
@@ -70,6 +72,8 @@ class Constant {
   static String CUSTID = "-";
   static String CUSTNAME = "ลูกค้าทั่วไป";
   static String CUSTTEL = "-";
+  static String CUSTTHAIID = "-";
+  static String MEMBERID = "";
 
   static String SERVERIP = "-";
   static String API = "-";
@@ -79,6 +83,9 @@ class Constant {
   static String CUSTIDTEMP = "-";
   static String CUSTNAMETEMP = "ลูกค้าทั่วไป";
   static String CUSTTELTEMP = "-";
+  static String CUSTTHAIIDTEMP = "-";
+  static String MEMBERIDTEMP = "";
+  static String MOBILEAPPPASSWORDTEMP = "-";
 
   //routes
   static const String HOME_ROUTE = "/home";

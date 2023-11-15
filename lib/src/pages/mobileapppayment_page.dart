@@ -182,17 +182,17 @@ class PostWidget extends StatelessWidget {
             children: <Widget>[
               ListTile(
                 title: Text("${post.type} ${post.billId}",
-                    style: TextStyle(fontSize: 20, color: Color(0xFFFFFFFF))),
+                    style: TextStyle(fontSize: 20, color: Color(0xFFf0e19b))),
                 subtitle: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 10),
                     Text(Constant.formatNumber.format(post.price),
-                        style: TextStyle(fontSize: 16, color: Color(0xFFFFFFFF))),
+                        style: TextStyle(fontSize: 16, color: Color(0xFFf0e19b))),
                     SizedBox(height: 10),
                     Text(post.status,
-                        style: TextStyle(fontSize: 16, color: Color(0xFFFFFFFF))),
+                        style: TextStyle(fontSize: 16, color: Color(0xFFf0e19b))),
                   ],
                 ),
               ),
@@ -201,7 +201,7 @@ class PostWidget extends StatelessWidget {
               ),
               Text(
                   "${Constant.formatDate.format(post.dateSend)}  ${post.timeSend}",
-                  style: TextStyle(fontSize: 12, color: Color(0xFFFFFFFF))),
+                  style: TextStyle(fontSize: 12, color: Color(0xFFf0e19b))),
             ]));
   }
 }
