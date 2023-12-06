@@ -301,12 +301,12 @@ class _SettingPageState extends State<SettingPage> {
     if (Platform.isIOS) {
       fbProtocolUrl = "fb://profile/100057361603649";
     } else {
-      fbProtocolUrl = "fb://page/100057361603649";
+      fbProtocolUrl = "https://www.facebook.com/thongbai1nont";
     }
 
 //    String fallbackUrl = 'https://www.facebook.com/page_name';
     String fallbackUrl =
-        "https://www.facebook.com/profile.php?id=100075430671206";
+        "https://www.facebook.com/thongbai1nont";
     try {
       bool launched = await launch(fbProtocolUrl, forceSafariVC: false);
 
@@ -328,7 +328,7 @@ class _SettingPageState extends State<SettingPage> {
 
 //    String fallbackUrl = 'https://www.facebook.com/page_name';
     String fallbackUrl =
-        "https://www.facebook.com/profile.php?id=100086191411782/";
+        "https://www.facebook.com/thongbai1nont";
     try {
       bool launched = await launch(fbProtocolUrl, forceSafariVC: false);
 

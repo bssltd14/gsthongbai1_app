@@ -553,7 +553,8 @@ class _TimeLinePageState extends State<TimeLinePage> {
         padding: EdgeInsets.only(bottom: 70),
         itemBuilder: (context, index) {
           return index >= posts.length
-              ? BottomLoader()
+              // ? BottomLoader()
+              ? Container()
               : PostWidget(post: posts[index], index: index);
         },
         separatorBuilder: (context, index) {
