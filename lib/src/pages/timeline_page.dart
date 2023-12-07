@@ -731,7 +731,7 @@ class PostWidget extends StatelessWidget {
           child: Row(
             children: <Widget>[
               showImage(post, MediaQuery.of(context).size.width),
-              showText(post, MediaQuery.of(context).size.width)
+              // showText(post, MediaQuery.of(context).size.width)
             ],
           ),
         ),
@@ -752,7 +752,7 @@ class PostWidget extends StatelessWidget {
           //BoxShadow(color: Colors.white70, blurRadius: 20, offset: Offset(0, 2))
         ], borderRadius: BorderRadius.circular(3)),
         padding: EdgeInsets.all(10.0),
-        width: width * 0.5,
+        width: width * 1,
 //      child: Image.network(post.mobileAppPromotionLink),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
