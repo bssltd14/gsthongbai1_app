@@ -140,7 +140,7 @@ class _SettingPageState extends State<SettingPage> {
       ),
       InkWell(
         onTap: () {
-          _makePhoneCall('tel:0645390033');
+          _makePhoneCall('tel:025251455');
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 3),
@@ -152,7 +152,7 @@ class _SettingPageState extends State<SettingPage> {
               ),
               SizedBox(width: 8),
               Text(
-                "064-539-0033",
+                "02-5251455",
                 style: TextStyle(
                   fontSize: 20,
                   color: Constant.FONT_COLOR_MENU,
