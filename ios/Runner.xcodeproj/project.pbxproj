@@ -512,7 +512,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.6;
 				OTHER_LIBTOOLFLAGS = "${inherited} -framework Flutter";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bssltd14.gsthongbai1;
 				PRODUCT_NAME = Runner;
@@ -778,7 +778,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.6;
 				OTHER_LIBTOOLFLAGS = "${inherited} -framework Flutter";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bssltd14.gsthongbai1;
 				PRODUCT_NAME = Runner;
@@ -821,7 +821,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.6;
 				OTHER_LIBTOOLFLAGS = "${inherited} -framework Flutter";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bssltd14.gsthongbai1;
 				PRODUCT_NAME = Runner;

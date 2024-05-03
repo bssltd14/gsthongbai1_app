@@ -194,73 +194,73 @@ class ItemTilePawn extends StatelessWidget {
                   ],
                 ),
               ),
-               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  IconButton(
-                      icon: Icon(
-                        Icons.add_circle,
-                        color: Color(0xFFFFFFFF),
-                      ),
-                      onPressed: () {
-                        Constant.MobileAppPaymentIntBranchName =
-                            item.branchName;
-                        Constant.MobileAppPaymentIntCustId = Constant.CUSTID;
-                        Constant.MobileAppPaymentIntType = "ต่อดอก";
-                        Constant.MobileAppPaymentIntBillId = item.pawnId;
-                        Constant.IntPerMonth =
-                            Constant.formatNumber2.format(item.intpay);
-                        Constant.BankAcctNameInt =
-                            item.mobileTranBankAcctNameInt;
-                        Constant.BankAcctNoInt = item.mobileTranBankAcctNoInt;
+              //  Row(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   children: [
+              //     IconButton(
+              //         icon: Icon(
+              //           Icons.add_circle,
+              //           color: Color(0xFFFFFFFF),
+              //         ),
+              //         onPressed: () {
+              //           Constant.MobileAppPaymentIntBranchName =
+              //               item.branchName;
+              //           Constant.MobileAppPaymentIntCustId = Constant.CUSTID;
+              //           Constant.MobileAppPaymentIntType = "ต่อดอก";
+              //           Constant.MobileAppPaymentIntBillId = item.pawnId;
+              //           Constant.IntPerMonth =
+              //               Constant.formatNumber2.format(item.intpay);
+              //           Constant.BankAcctNameInt =
+              //               item.mobileTranBankAcctNameInt;
+              //           Constant.BankAcctNoInt = item.mobileTranBankAcctNoInt;
 
-                        if (item.mobileTranBankInt == "BAY") {
-                          Constant.BankAccInt = "กรุงศรีอยุธยา";
-                        } else if (item.mobileTranBankInt == "BAAC") {
-                          Constant.BankAccInt = "ธ.ก.ส";
-                        } else if (item.mobileTranBankInt == "BBL") {
-                          Constant.BankAccInt = "กรุงเทพ";
-                        } else if (item.mobileTranBankInt == "CIMBT") {
-                          Constant.BankAccInt = "ซีไอเอ็มบี ไทย";
-                        } else if (item.mobileTranBankInt == "GSB") {
-                          Constant.BankAccInt = "ออมสิน";
-                        } else if (item.mobileTranBankInt == "ICBS") {
-                          Constant.BankAccInt = "ไอซีบีซี (ไทย)";
-                        } else if (item.mobileTranBankInt == "KBANK") {
-                          Constant.BankAccInt = "กสิกรไทย";
-                        } else if (item.mobileTranBankInt == "KK") {
-                          Constant.BankAccInt = "เกียรตินาคินภัทร";
-                        } else if (item.mobileTranBankInt == "KTB") {
-                          Constant.BankAccInt = "กรุงไทย";
-                        } else if (item.mobileTranBankInt == "LH") {
-                          Constant.BankAccInt = "แลนด์ แอนด์ เฮ้าส์";
-                        } else if (item.mobileTranBankInt == "SCB") {
-                          Constant.BankAccInt = "ไทยพาณิชย์";
-                        } else if (item.mobileTranBankInt == "TISCO") {
-                          Constant.BankAccInt = "ทิสโก้";
-                        } else if (item.mobileTranBankInt == "TTB") {
-                          Constant.BankAccInt = "ทหารไทยธนชาต";
-                        } else if (item.mobileTranBankInt == "UOB") {
-                          Constant.BankAccInt = "ยูโอบี";
-                        } else {
-                          Constant.BankAccInt = "";
-                        }
-                        print(Constant.OverDayInt.toString());
-                        if (item.duedate
-                            .add(Duration(days: Constant.OverDayInt))
-                            // .add( Duration(days:1))
-                            .isAfter(DateTime.now())) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => UploadSlipIntPage(),
-                              ));
-                        } else {
-                          showDialogDueDateOver(context);
-                        }
-                      }),
-                ],
-              ),
+              //           if (item.mobileTranBankInt == "BAY") {
+              //             Constant.BankAccInt = "กรุงศรีอยุธยา";
+              //           } else if (item.mobileTranBankInt == "BAAC") {
+              //             Constant.BankAccInt = "ธ.ก.ส";
+              //           } else if (item.mobileTranBankInt == "BBL") {
+              //             Constant.BankAccInt = "กรุงเทพ";
+              //           } else if (item.mobileTranBankInt == "CIMBT") {
+              //             Constant.BankAccInt = "ซีไอเอ็มบี ไทย";
+              //           } else if (item.mobileTranBankInt == "GSB") {
+              //             Constant.BankAccInt = "ออมสิน";
+              //           } else if (item.mobileTranBankInt == "ICBS") {
+              //             Constant.BankAccInt = "ไอซีบีซี (ไทย)";
+              //           } else if (item.mobileTranBankInt == "KBANK") {
+              //             Constant.BankAccInt = "กสิกรไทย";
+              //           } else if (item.mobileTranBankInt == "KK") {
+              //             Constant.BankAccInt = "เกียรตินาคินภัทร";
+              //           } else if (item.mobileTranBankInt == "KTB") {
+              //             Constant.BankAccInt = "กรุงไทย";
+              //           } else if (item.mobileTranBankInt == "LH") {
+              //             Constant.BankAccInt = "แลนด์ แอนด์ เฮ้าส์";
+              //           } else if (item.mobileTranBankInt == "SCB") {
+              //             Constant.BankAccInt = "ไทยพาณิชย์";
+              //           } else if (item.mobileTranBankInt == "TISCO") {
+              //             Constant.BankAccInt = "ทิสโก้";
+              //           } else if (item.mobileTranBankInt == "TTB") {
+              //             Constant.BankAccInt = "ทหารไทยธนชาต";
+              //           } else if (item.mobileTranBankInt == "UOB") {
+              //             Constant.BankAccInt = "ยูโอบี";
+              //           } else {
+              //             Constant.BankAccInt = "";
+              //           }
+              //           print(Constant.OverDayInt.toString());
+              //           if (item.duedate
+              //               .add(Duration(days: Constant.OverDayInt))
+              //               // .add( Duration(days:1))
+              //               .isAfter(DateTime.now())) {
+              //             Navigator.push(
+              //                 context,
+              //                 MaterialPageRoute(
+              //                   builder: (context) => UploadSlipIntPage(),
+              //                 ));
+              //           } else {
+              //             showDialogDueDateOver(context);
+              //           }
+              //         }),
+              //   ],
+              // ),
             ],
           ),
         ),
@@ -290,47 +290,47 @@ class ItemTilePawn extends StatelessWidget {
           Text(
             "สาขาที่ทำรายการ  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Text(
             "เลขที่  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Text(
             "สินค้า  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Text(
             "จำนวนรวม  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Text(
             "น้ำหนักรวม  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Text(
             "จำนวนเงิน  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Text(
             "ระยะเวลา  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Text(
             "วันที่ฝาก  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Text(
             "วันที่ครบกำหนด  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           SizedBox(height: 5),
         ],
@@ -350,7 +350,7 @@ class ItemTilePawn extends StatelessWidget {
             "  ${item.branchName}",
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -359,14 +359,14 @@ class ItemTilePawn extends StatelessWidget {
                 "  ${item.pawnId}",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFFFFFFFF),
+                    color: Color(0xFFf0e19b),
                     fontSize: 18),
               ),
               Text(
                 "สถานะ ${item.outStatus}",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFFFFFFFF),
+                    color: Color(0xFFf0e19b),
                     fontSize: 16),
               ),
             ],
@@ -375,37 +375,37 @@ class ItemTilePawn extends StatelessWidget {
             "  ${item.sumDescription}",
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Text(
             "  ${Constant.formatNumber.format(item.sumItemQty)} ชิ้น",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Text(
             "  ${Constant.formatNumber2.format(item.sumItemwt)} กรัม",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Text(
             "  ${Constant.formatNumber.format(item.amountget)} บาท",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Text(
             "  ${Constant.formatNumber.format(item.months)} เดือน",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Text(
             "  ${Constant.formatDate.format(item.inDate)}",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           Text(
             "  ${Constant.formatDate.format(item.duedate)}",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFFFFFFF), fontSize: 16),
+                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
           ),
           SizedBox(height: 5),
         ],

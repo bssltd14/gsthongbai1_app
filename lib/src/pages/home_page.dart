@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
+import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,66 +33,71 @@ class _HomePageState extends State<HomePage> {
     Constant.handleClickNotification(context);
   }
 
+  int maxCount = 4;
+
   @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
   }
 
-  final List<Widget> _pages = [
+  final List<Widget> bottomBarPages = [
     TimeLinePage(),
     SavingMtPage(),
     // PointPage(),
-    // PawnPage(),
+    PawnPage(),
     SettingPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox.expand(
-        child: PageView(
-          controller: _pageController,
-          onPageChanged: (index) {
-            setState(() => _currentIndex = index);
-          },
-          children: <Widget>[_pages[_currentIndex]],
-        ),
+      body: PageView(
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: List.generate(
+            bottomBarPages.length, (index) => bottomBarPages[index]),
       ),
-      bottomNavigationBar: BottomNavyBar(
-        selectedIndex: _currentIndex,
-        showElevation: true, // use this to remove appBar's elevation
-        onItemSelected: (index) => setState(() {
-          _currentIndex = index;
-        }),
-        items: <BottomNavyBarItem>[
-          BottomNavyBarItem(
-              title: Text('หน้าหลัก'),
-              icon: Icon(Icons.home),
-              inactiveColor: Color(0xFF990000),
-              activeColor: Color(0xFF990000)),
-          BottomNavyBarItem(
-              title: Text('ออมทอง'),
-              icon: Icon(Icons.monetization_on),
-              inactiveColor: Color(0xFF990000),
-              activeColor: Color(0xFF990000)),
-          // BottomNavyBarItem(
-          //     title: Text('คะแนน'),
-          //     icon: Icon(Icons.control_point),
-          //     inactiveColor: Color(0xFF990000),
-          //     activeColor: Color(0xFF990000)),
-          // BottomNavyBarItem(
-          //     title: Text('ขายฝาก'),
-          //     icon: Icon(Icons.account_balance),
-          //     inactiveColor: Color(0xFF990000),
-          //     activeColor: Color(0xFF990000)),
-          BottomNavyBarItem(
-              title: Text('ติดต่อเรา'),
-              icon: Icon(Icons.menu),
-              inactiveColor: Color(0xFF990000),
-              activeColor: Color(0xFF990000)),
-        ],
-      ),
+      extendBody: true,
+      bottomNavigationBar: (bottomBarPages.length <= maxCount)
+          ? CurvedNavigationBar(
+              color: Color(0xFFfefca7),
+              backgroundColor: Colors.transparent,
+              buttonBackgroundColor: Colors.white,
+              items: [
+                const CurvedNavigationBarItem(
+                    child: Icon(
+                      Icons.home_outlined,color: Color(0xFF7a131a),size: 35,),
+                    label: 'หน้าหลัก',
+                    labelStyle: TextStyle(color: Color(0xFF7a131a))),
+                const CurvedNavigationBarItem(
+                    child:
+                        Icon(Icons.savings, color: Color(0xFF7a131a), size: 35),
+                    label: 'ออมทอง',
+                    labelStyle: TextStyle(color: Color(0xFF7a131a))),
+                // const CurvedNavigationBarItem(
+                //     child:
+                //         Icon(Icons.paypal, color: Color(0xFF7a131a), size: 35),
+                //     label: 'คะแนน',
+                //     labelStyle: TextStyle(color: Color(0xFF7a131a))),
+                const CurvedNavigationBarItem(
+                    child: Icon(Icons.account_balance,
+                        color: Color(0xFF7a131a), size: 35),
+                    label: 'ขายฝาก',
+                    labelStyle: TextStyle(color: Color(0xFF7a131a))),
+                const CurvedNavigationBarItem(
+                    child: Icon(Icons.support_agent,
+                        color: Color(0xFF7a131a), size: 35),
+                    label: 'ติดต่อเรา',
+                    labelStyle: TextStyle(color: Color(0xFF7a131a))),
+              ],
+              onTap: (index) {
+                /// perform action on tab change and to update pages you can update pages without pages
+                // log('current selected index $index');
+                _pageController.jumpToPage(index);
+              },
+            )
+          : null,
     );
   }
 
