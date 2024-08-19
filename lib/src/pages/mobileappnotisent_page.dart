@@ -102,7 +102,14 @@ class _MobileAppNotiSentPageState extends State<MobileAppNotiSentPage> {
               }
 
               if (state is Failure) {
-                return Center(child: Text('Oops something went wrong!'));
+                return Center(
+                  child: Text("ไม่พบข้อมูลแจ้งเตือน",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Constant.FONT_COLOR_MENU,
+                          fontSize: 24),
+                      textAlign: TextAlign.right),
+                );
               }
 
               return Center(
@@ -121,7 +128,12 @@ class _MobileAppNotiSentPageState extends State<MobileAppNotiSentPage> {
       child: BlocBuilder<MobileAppNotiSentBloc, MobileAppNotiSentState>(
         builder: (context, state) {
           if (state is Failure) {
-            return Center(child: Text('Oops something went wrong!'));
+            return Center(child: Text("ไม่พบข้อมูลแจ้งเตือน",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Constant.FONT_COLOR_MENU,
+                        fontSize: 24),
+                    textAlign: TextAlign.right),);
           }
           if (state is MobileAppNotiSentLoaded) {
             if (state.items.isEmpty) {
@@ -130,7 +142,7 @@ class _MobileAppNotiSentPageState extends State<MobileAppNotiSentPage> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Constant.FONT_COLOR_MENU,
-                        fontSize: 18),
+                        fontSize: 24),
                     textAlign: TextAlign.right),
               );
             }

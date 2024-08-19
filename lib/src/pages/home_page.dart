@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
     Constant.handleClickNotification(context);
   }
 
-  int maxCount = 4;
+  int maxCount = 3;
 
   @override
   void dispose() {
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
     TimeLinePage(),
     SavingMtPage(),
     // PointPage(),
-    PawnPage(),
+    // PawnPage(),
     SettingPage(),
   ];
 
@@ -80,11 +80,11 @@ class _HomePageState extends State<HomePage> {
                 //         Icon(Icons.paypal, color: Color(0xFF7a131a), size: 35),
                 //     label: 'คะแนน',
                 //     labelStyle: TextStyle(color: Color(0xFF7a131a))),
-                const CurvedNavigationBarItem(
-                    child: Icon(Icons.account_balance,
-                        color: Color(0xFF7a131a), size: 35),
-                    label: 'ขายฝาก',
-                    labelStyle: TextStyle(color: Color(0xFF7a131a))),
+                // const CurvedNavigationBarItem(
+                //     child: Icon(Icons.account_balance,
+                //         color: Color(0xFF7a131a), size: 35),
+                //     label: 'ขายฝาก',
+                //     labelStyle: TextStyle(color: Color(0xFF7a131a))),
                 const CurvedNavigationBarItem(
                     child: Icon(Icons.support_agent,
                         color: Color(0xFF7a131a), size: 35),

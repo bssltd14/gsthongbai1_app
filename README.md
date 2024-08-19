@@ -8,6 +8,7 @@ IP Server : 203.150.144.66
 DB Name : GS2020TB1-201023
 
 Bundle ID : com.bssltd14.gsthongbai1
+Bundle ID Android : com.thongbai1.thongbai1goldapp
 
 Onesignal ID : 00d1b28f-deb0-46a8-816f-ab0828e4a566
 Onesignal Reskey : MDlhMzQyMjEtZWQ2Mi00MmZjLThhMWQtMjg2M2Q2NTRjODFj

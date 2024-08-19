@@ -12,10 +12,52 @@ import 'package:gsthongbai1app/src/pages/uploadslipint_page.dart';
 import 'package:gsthongbai1app/src/themes/page_theme.dart';
 import 'package:gsthongbai1app/src/utils/constant.dart';
 import 'package:gsthongbai1app/src/widgets/logintitle.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class PawnPage extends StatefulWidget {
   @override
   _PawnPage createState() => _PawnPage();
+}
+
+Future<void> checkWaitingApprovalMobileAppPaymentInt(
+    String billid, String branchName, BuildContext context) async {
+  try {
+    print("checkWaitingApprovalMobileAppPaymentInt");
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'serverId': Constant.ServerId,
+      'customerId': Constant.CustomerId
+    };
+    final url =
+        "${Constant.API}/CheckWaitingApprovalMobileAppPaymentInt?billid=${billid}&branchname=${branchName}";
+    final response = await http.get(Uri.parse(url), headers: requestHeaders);
+    print(url);
+    if (response.statusCode == 204) {
+      print("checkWaitingApprovalMobileAppPaymentInt 204 Complete");
+//เช็คแล้วว่าไม่มีรายการรออนุมัติ
+
+      var dueDate = DateFormat('dd/MM/yyyy').parse(Constant.DueDate);
+      if (dueDate
+          .add(Duration(days: Constant.OverDayInt))
+          .isBefore(DateTime.now())) {
+        showDialogDueDateOver(context);
+        print('After ${dueDate.subtract(Duration(days: 1))}');
+      } else {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => UploadSlipIntPage(),
+            ));
+      }
+    } else {
+      print("checkWaitingApprovalMobileAppPaymentInt ${response.statusCode}");
+      //มีรายการอนุมัติ ตาลทำไปข้อความแจ้งเตือน
+      showDialogWaiting(context);
+    }
+  } catch (_) {
+    print("${_}");
+  }
 }
 
 class _PawnPage extends State<PawnPage> {
@@ -24,7 +66,7 @@ class _PawnPage extends State<PawnPage> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/bg-home3.png"),
+          image: AssetImage("assets/images/bg-home.png"),
           fit: BoxFit.cover,
         ),
       ),
@@ -39,21 +81,25 @@ class _PawnPage extends State<PawnPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    IconButton(
-                        icon: Icon(
-                          Icons.history,
-                          color: Constant.FONT_COLOR_MENU,
-                        ),
-                        onPressed: () {
-                          Constant.MobileAppPaymentIntCustId = Constant.CUSTID;
-                          Constant.MobileAppPaymentIntType = "ต่อดอก";
-                          Constant.MobileAppPaymentIntBillId = "";
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MobileAppPaymentIntPage(),
-                              ));
-                        }),
+                    Constant.CUSTID == '-'
+                        ? SizedBox()
+                        : IconButton(
+                            icon: Icon(
+                              Icons.history,
+                              color: Constant.FONT_COLOR_MENU,
+                            ),
+                            onPressed: () {
+                              Constant.MobileAppPaymentIntCustId =
+                                  Constant.CUSTID;
+                              Constant.MobileAppPaymentIntType = "ต่อดอก";
+                              Constant.MobileAppPaymentIntBillId = "";
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        MobileAppPaymentIntPage(),
+                                  ));
+                            }),
                   ],
                 ),
               ],
@@ -176,10 +222,7 @@ class ItemTilePawn extends StatelessWidget {
                 ],
               ),
               border: Border.all(
-                color: Color(0xFFf0e19b),
-                width: 5,
-                style: BorderStyle.solid
-              ),
+                  color: Color(0xFFf0e19b), width: 5, style: BorderStyle.solid),
               borderRadius: BorderRadius.circular(15)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -193,6 +236,102 @@ class ItemTilePawn extends StatelessWidget {
                     _buildDetail(item, MediaQuery.of(context).size.width),
                   ],
                 ),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 40,
+                          width: 130,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Color(0xFFFFFFFF)),
+                          child: InkWell(
+                        onTap: () {
+                          Constant.MobileAppPaymentIntBranchName =
+                              item.branchName;
+                          Constant.MobileAppPaymentIntCustId = Constant.CUSTID;
+                          Constant.MobileAppPaymentIntType = "ต่อดอก";
+                          Constant.MobileAppPaymentIntBillId = item.pawnId;
+                          Constant.IntPerMonth =
+                              Constant.formatNumber2.format(item.intpay);
+                          Constant.BankInt = item.mobileTranBankInt;
+                          Constant.BankAcctNameInt =
+                              item.mobileTranBankAcctNameInt;
+                          Constant.BankAcctNoInt = item.mobileTranBankAcctNoInt;
+                          Constant.Month =
+                              Constant.formatNumber.format(item.months);
+                          Constant.DueDate =
+                              Constant.formatDate.format(item.duedate);
+                          if (item.mobileTranBankInt == "BAY") {
+                            Constant.BankAccInt = "กรุงศรีอยุธยา";
+                          } else if (item.mobileTranBankInt == "BAAC") {
+                            Constant.BankAccInt = "ธ.ก.ส";
+                          } else if (item.mobileTranBankInt == "BBL") {
+                            Constant.BankAccInt = "กรุงเทพ";
+                          } else if (item.mobileTranBankInt == "CIMBT") {
+                            Constant.BankAccInt = "ซีไอเอ็มบี ไทย";
+                          } else if (item.mobileTranBankInt == "GSB") {
+                            Constant.BankAccInt = "ออมสิน";
+                          } else if (item.mobileTranBankInt == "ICBS") {
+                            Constant.BankAccInt = "ไอซีบีซี (ไทย)";
+                          } else if (item.mobileTranBankInt == "KBANK") {
+                            Constant.BankAccInt = "กสิกรไทย";
+                          } else if (item.mobileTranBankInt == "KK") {
+                            Constant.BankAccInt = "เกียรตินาคินภัทร";
+                          } else if (item.mobileTranBankInt == "KTB") {
+                            Constant.BankAccInt = "กรุงไทย";
+                          } else if (item.mobileTranBankInt == "LH") {
+                            Constant.BankAccInt = "แลนด์ แอนด์ เฮ้าส์";
+                          } else if (item.mobileTranBankInt == "SCB") {
+                            Constant.BankAccInt = "ไทยพาณิชย์";
+                          } else if (item.mobileTranBankInt == "TISCO") {
+                            Constant.BankAccInt = "ทิสโก้";
+                          } else if (item.mobileTranBankInt == "TTB") {
+                            Constant.BankAccInt = "ทหารไทยธนชาต";
+                          } else if (item.mobileTranBankInt == "UOB") {
+                            Constant.BankAccInt = "ยูโอบี";
+                          } else {
+                            Constant.BankAccInt = "";
+                          }
+                          {
+                            checkWaitingApprovalMobileAppPaymentInt(
+                                item.pawnId, item.branchName, context);
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => UploadSlipIntPage(),
+                            //     ));
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.add_circle,
+                                color: Constant.PRIMARY_COLOR,
+                              ),
+                            ),
+                            Text(
+                              "ต่อดอกเบี้ย",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Constant.PRIMARY_COLOR,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               //  Row(
               //   mainAxisAlignment: MainAxisAlignment.end,
@@ -290,47 +429,65 @@ class ItemTilePawn extends StatelessWidget {
           Text(
             "สาขาที่ทำรายการ  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Text(
             "เลขที่  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Text(
             "สินค้า  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Text(
             "จำนวนรวม  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Text(
             "น้ำหนักรวม  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Text(
             "จำนวนเงิน  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Text(
             "ระยะเวลา  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Text(
             "วันที่ฝาก  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Text(
             "วันที่ครบกำหนด  :",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           SizedBox(height: 5),
         ],
@@ -350,7 +507,9 @@ class ItemTilePawn extends StatelessWidget {
             "  ${item.branchName}",
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -375,37 +534,51 @@ class ItemTilePawn extends StatelessWidget {
             "  ${item.sumDescription}",
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Text(
             "  ${Constant.formatNumber.format(item.sumItemQty)} ชิ้น",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Text(
             "  ${Constant.formatNumber2.format(item.sumItemwt)} กรัม",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Text(
             "  ${Constant.formatNumber.format(item.amountget)} บาท",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Text(
             "  ${Constant.formatNumber.format(item.months)} เดือน",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Text(
             "  ${Constant.formatDate.format(item.inDate)}",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           Text(
             "  ${Constant.formatDate.format(item.duedate)}",
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: Color(0xFFf0e19b), fontSize: 16),
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFf0e19b),
+                fontSize: 16),
           ),
           SizedBox(height: 5),
         ],
@@ -415,35 +588,71 @@ class ItemTilePawn extends StatelessWidget {
 }
 
 void showDialogDueDateOver(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      // false = user must tap button, true = tap outside dialog
-      builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: Text(
-            "❗️รายการเกินกำหนด" +
-                            "\n" +
-                            "\n" +
-                            "กรุณาติดต่อหน้าร้านโดยตรง",
-            style: TextStyle(color: Colors.red),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text(
-                'ตกลง',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Constant.FONT_COLOR_MENU,
-                  fontWeight: FontWeight.bold,
-                ),
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    // false = user must tap button, true = tap outside dialog
+    builder: (BuildContext dialogContext) {
+      return AlertDialog(
+        title: Text(
+          "❗️รายการเกินกำหนด" + "\n" + "\n" + "กรุณาติดต่อหน้าร้านโดยตรง",
+          style: TextStyle(color: Colors.red),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text(
+              'ตกลง',
+              style: TextStyle(
+                fontSize: 20,
+                color: Constant.FONT_COLOR_MENU,
+                fontWeight: FontWeight.bold,
               ),
-              onPressed: () {
-                Navigator.of(dialogContext).pop(); // Dismiss alert dialog
-              },
             ),
-          ],
-        );
-      },
-    );
-  }
+            onPressed: () {
+              Navigator.of(dialogContext).pop(); // Dismiss alert dialog
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void showDialogWaiting(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    // false = user must tap button, true = tap outside dialog
+    builder: (BuildContext dialogContext) {
+      return AlertDialog(
+        content: Container(
+          height: 250,
+          child: Column(
+            children: [
+              Image.asset(
+                "assets/images/waiting.png",
+                height: 250,
+                width: 250,
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text(
+              'ตกลง',
+              style: TextStyle(
+                fontSize: 20,
+                color: Constant.FONT_COLOR_MENU,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onPressed: () {
+              Navigator.of(dialogContext).pop(); // Dismiss alert dialog
+            },
+          ),
+        ],
+      );
+    },
+  );
+}

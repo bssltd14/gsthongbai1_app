@@ -152,9 +152,12 @@ class Constant {
   static String MobileAppPaymentIntType = "";
   static String MobileAppPaymentIntBillId = "";
   static String IntPerMonth = "";
+   static String BankInt = "";
   static String BankAcctNameInt = "";
   static String BankAcctNoInt = "";
   static String BankAccInt = "";
+  static String Month = "";
+  static String DueDate = "";
 
   static int CountUnreadNoti = 0;
 

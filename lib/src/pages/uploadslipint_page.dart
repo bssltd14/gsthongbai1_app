@@ -36,7 +36,7 @@ class _UploadSlipIntPageState extends State<UploadSlipIntPage> {
   DateTime _selectedDate = DateTime.now();
   int _counterValue = 1;
 
-String _setImage() {
+  String _setImage() {
     String _mTitle = "${Constant.BankAccInt}";
 
     if (_mTitle == "กรุงศรีอยุธยา") {
@@ -72,12 +72,14 @@ String _setImage() {
     print("_mTitle: $_mTitle"); // works
 // works
   }
-   @override
+
+  @override
   void initState() {
     DateFormat dateFormat = DateFormat("HH:mm");
     timeinput.text = dateFormat.format(DateTime.now());
-    amountPay.text = Constant.formatNumber
-        .format(double.parse(Constant.IntPerMonth.toString().replaceAll(",", "")) * _counterValue);
+    amountPay.text = Constant.formatNumber.format(
+        double.parse(Constant.IntPerMonth.toString().replaceAll(",", "")) *
+            double.parse(Constant.Month.toString().replaceAll(",", "")));
   }
 
   @override
@@ -85,7 +87,7 @@ String _setImage() {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/bg-home2.png"),
+          image: AssetImage("assets/images/bg-white.png"),
           fit: BoxFit.cover,
         ),
       ),
@@ -135,7 +137,7 @@ String _setImage() {
                             ),
                             SizedBox(height: 10),
                             Text(
-                               Constant.BankAcctNameInt,
+                              Constant.BankAcctNameInt,
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Constant.FONT_COLOR_MENU,
@@ -144,7 +146,7 @@ String _setImage() {
                             Row(
                               children: [
                                 Text(
-                                   Constant.BankAcctNoInt,
+                                  Constant.BankAcctNoInt,
                                   style: TextStyle(
                                     fontSize: 20,
                                     color: Constant.FONT_COLOR_MENU,
@@ -157,8 +159,8 @@ String _setImage() {
                                       color: Constant.FONT_COLOR_MENU,
                                     ),
                                     onPressed: () async {
-                                      await Clipboard.setData(
-                                          ClipboardData(text: Constant.BankAcctNoInt));
+                                      await Clipboard.setData(ClipboardData(
+                                          text: Constant.BankAcctNoInt));
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(
                                         content: Text('Copied to clipboard'),
@@ -173,9 +175,9 @@ String _setImage() {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "ดอกเบี้ยเดือนละ ${Constant.IntPerMonth} บาท",
+                    "ดอกเบี้ย ${Constant.formatNumber.format(double.parse(Constant.IntPerMonth.toString().replaceAll(",", "")) * double.parse(Constant.Month.toString().replaceAll(",", "")))} บาท",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 26,
                       color: Constant.FONT_COLOR_MENU,
                     ),
                   ),
@@ -186,38 +188,46 @@ String _setImage() {
                       Text(
                         "จำนวน",
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 26,
                           color: Constant.FONT_COLOR_MENU,
                         ),
                       ),
                       SizedBox(width: 10),
-                      Center(
-                        child: CounterButton(
-                          loading: false,
-                          onChange: (int val) {
-                            setState(() {
-                              if (val <= 0) {
-                                _counterValue = 1;
-                              } else {
-                                _counterValue = val;
-                              }
-
-                              amountPay.text = Constant.formatNumber.format(
-                                  double.parse(Constant.IntPerMonth.toString().replaceAll(",", "")) *
-                                      _counterValue);
-                            });
-                          },
-                          count: _counterValue,
-                          countColor: Constant.FONT_COLOR_MENU,
-                          buttonColor: Constant.FONT_COLOR_MENU,
-                          progressColor: Constant.FONT_COLOR_MENU,
+                      Text(
+                        Constant.Month,
+                        style: TextStyle(
+                          fontSize: 30,
+                          height: 1,
+                          color: Constant.FONT_COLOR_MENU,
                         ),
                       ),
+                      // Center(
+                      //   child: CounterButton(
+                      //     loading: false,
+                      //     onChange: (int val) {
+                      //       setState(() {
+                      //         if (val <= 0) {
+                      //           _counterValue = 1;
+                      //         } else {
+                      //           _counterValue = val;
+                      //         }
+
+                      //         amountPay.text = Constant.formatNumber.format(
+                      //             double.parse(Constant.IntPerMonth.toString().replaceAll(",", "")) *
+                      //                 _counterValue);
+                      //       });
+                      //     },
+                      //     count: _counterValue,
+                      //     countColor: Constant.FONT_COLOR_MENU,
+                      //     buttonColor: Constant.FONT_COLOR_MENU,
+                      //     progressColor: Constant.FONT_COLOR_MENU,
+                      //   ),
+                      // ),
                       SizedBox(width: 10),
                       Text(
                         "เดือน",
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 26,
                           color: Constant.FONT_COLOR_MENU,
                         ),
                       ),
@@ -284,7 +294,7 @@ String _setImage() {
                           child: Text(
                             "เลือกรูป",
                             style: TextStyle(
-                                color: Color(0xFFFFFFFF),
+                                color: Color(0xFFf0e19b),
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -332,7 +342,7 @@ String _setImage() {
                           child: Text(
                             "ถ่ายรูป",
                             style: TextStyle(
-                                color: Color(0xFFFFFFFF),
+                                color: Color(0xFFf0e19b),
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -355,8 +365,8 @@ String _setImage() {
                           readOnly: true,
                           controller: amountPay,
                           onSaved: (price) {
-                            _mobileAppPaymentIntResponse.price =
-                                double.parse(price.toString().replaceAll(",", ""));
+                            _mobileAppPaymentIntResponse.price = double.parse(
+                                price.toString().replaceAll(",", ""));
                           },
                           validator: RequiredValidator(
                               errorText: "กรุณาใส่จำนวนเงินที่โอน"),
@@ -466,7 +476,7 @@ String _setImage() {
                           child: Text(
                             "วันที่โอน ${Constant.formatDate.format(Constant.SelectDate)}",
                             style: TextStyle(
-                                color: Color(0xFFFFFFFF),
+                                color: Color(0xFFf0e19b),
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -560,9 +570,9 @@ String _setImage() {
                                 MaterialStateProperty.all<Color>(Colors.white),
                           ),
                           child: Text(
-                            "ยืนยันส่งสลิป",
+                            "บันทึกข้อมูล",
                             style: TextStyle(
-                                color: Color(0xFFFFFFFF),
+                                color: Color(0xFFf0e19b),
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -630,24 +640,25 @@ String _setImage() {
                                           "type":
                                               Constant.MobileAppPaymentIntType,
                                           "status": "รออนุมัติ",
-                                          "custId":
-                                              Constant.MobileAppPaymentIntCustId,
+                                          "custId": Constant
+                                              .MobileAppPaymentIntCustId,
                                           "custName": Constant.CUSTNAME,
-                                          "billId":
-                                              Constant.MobileAppPaymentIntBillId,
+                                          "billId": Constant
+                                              .MobileAppPaymentIntBillId,
                                           "picLink": url,
                                           "price": _mobileAppPaymentIntResponse
                                               .price
                                               .toString(),
-                                          "remark":
-                                              _mobileAppPaymentIntResponse.remark,
+                                          "remark": _mobileAppPaymentIntResponse
+                                              .remark,
                                           "tranBank": "",
                                           "tranBankAccNo": "",
                                           "dateTran": Constant
                                               .formatDateToDatabase
                                               .format(Constant.SelectDate),
                                           "timeTran":
-                                              _mobileAppPaymentIntResponse.timeTran,
+                                              _mobileAppPaymentIntResponse
+                                                  .timeTran,
                                           "dayPay": "0",
                                           "monthPay": _counterValue.toString(),
                                         });
@@ -683,7 +694,8 @@ String _setImage() {
                                     'serverId': Constant.ServerId,
                                     'customerId': Constant.CustomerId,
                                     'onesignalappid': Constant.OneSignalAppId,
-                                    'onesignalrestkey': Constant.OneSignalRestkey
+                                    'onesignalrestkey':
+                                        Constant.OneSignalRestkey
                                   };
 
                                   final responseSendnoti = await http.put(
@@ -696,8 +708,10 @@ String _setImage() {
                                   setState(() {
                                     _imageFile = null;
                                     _counterValue = 1;
-                                    amountPay.text = Constant.formatNumber.format(
-                                        double.parse(Constant.IntPerMonth.toString().replaceAll(",", "")) *
+                                    amountPay.text = Constant.formatNumber
+                                        .format(double.parse(
+                                                Constant.IntPerMonth.toString()
+                                                    .replaceAll(",", "")) *
                                             _counterValue);
                                   });
                                 } else {
@@ -722,7 +736,9 @@ String _setImage() {
                       ),
                     ),
                   ),
-                  SizedBox(height: 40,)
+                  SizedBox(
+                    height: 40,
+                  )
                 ],
               ),
             ),
@@ -881,10 +897,14 @@ String _setImage() {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              onPressed: ()   {
-                 Navigator.of(dialogContext).pop(true); // Dismiss alert dialo
-                Navigator.pushAndRemoveUntil(context, 
-                MaterialPageRoute(builder: (context) => HomePage(),), (route) => false);
+              onPressed: () {
+                Navigator.of(dialogContext).pop(true); // Dismiss alert dialo
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(),
+                    ),
+                    (route) => false);
               },
             ),
           ],

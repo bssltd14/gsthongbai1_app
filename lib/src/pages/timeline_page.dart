@@ -165,7 +165,7 @@ class _TimeLinePageState extends State<TimeLinePage> {
                           height: 110,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage("assets/images/logo.png"))),
+                                  image: AssetImage("assets/images/logo2.png"))),
                         ),
                       ),
                       Padding(

@@ -62,7 +62,7 @@ class _SettingPageState extends State<SettingPage> {
             height: 130,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/images/logo.png"))),
+                    image: AssetImage("assets/images/logo2.png"))),
           ),
         ],
       ),

@@ -12,10 +12,43 @@ import 'package:gsthongbai1app/src/utils/constant.dart';
 import 'package:gsthongbai1app/src/widgets/logintitle.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
 
 class SavingMtPage extends StatefulWidget {
   @override
   _SavingMtPage createState() => _SavingMtPage();
+}
+
+Future<void> checkWaitingApprovalMobileAppPayment(
+    String billid, String branchName, BuildContext context) async {
+  try {
+    print("checkWaitingApprovalMobileAppPayment");
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'serverId': Constant.ServerId,
+      'customerId': Constant.CustomerId
+    };
+    final url =
+        "${Constant.API}/CheckWaitingApprovalMobileAppPayment?billid=${billid}&branchname=${branchName}";
+    final response = await http.get(Uri.parse(url), headers: requestHeaders);
+    print(url);
+    if (response.statusCode == 204) {
+      print("checkWaitingApprovalMobileAppPayment 204 Complete");
+//เช็คแล้วว่าไม่มีรายการรออนุมัติ
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => UploadSlipPagePage(),
+            //  builder: (context) => SavingPayPage(),
+          ));
+    } else {
+      print("checkWaitingApprovalMobileAppPayment ${response.statusCode}");
+      //มีรายการอนุมัติ ตาลทำไปข้อความแจ้งเตือน
+      showDialogWaiting(context);
+    }
+  } catch (_) {
+    print("${_}");
+  }
 }
 
 class _SavingMtPage extends State<SavingMtPage> {
@@ -39,7 +72,9 @@ class _SavingMtPage extends State<SavingMtPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    IconButton(
+                    Constant.CUSTID == '-'
+                        ? SizedBox()
+                        : IconButton(
                         icon: Icon(
                           Icons.history,
                           color: Constant.FONT_COLOR_MENU,
@@ -177,7 +212,7 @@ class ItemTileSavingMt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 210,
+      height: 230,
       margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
       child: InkWell(
         child: Container(
@@ -212,67 +247,95 @@ class ItemTileSavingMt extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                height: 30,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                        icon: Icon(
-                          Icons.add_circle,
-                          color: Color(0xFFf0e19b),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 40,
+                          width: 130,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Color(0xFFFFFFFF)),
+                          child: InkWell(
+                            onTap: () {
+                              Constant.MobileAppPaymentBranchName =
+                                  item.branchName;
+                              Constant.MobileAppPaymentCustId = Constant.CUSTID;
+                              Constant.MobileAppPaymentType = "ออมทอง";
+                              Constant.MobileAppPaymentBillId = item.savingId;
+                              Constant.BankAcctNameSaving =
+                                  item.mobileTranBankAcctNameSaving;
+                              Constant.BankAcctNoSaving =
+                                  item.mobileTranBankAcctNoSaving;
+
+                              if (item.mobileTranBankSaving == "BAY") {
+                                Constant.BankAccSaving = "กรุงศรีอยุธยา";
+                              } else if (item.mobileTranBankSaving == "BAAC") {
+                                Constant.BankAccSaving = "ธ.ก.ส";
+                              } else if (item.mobileTranBankSaving == "BBL") {
+                                Constant.BankAccSaving = "กรุงเทพ";
+                              } else if (item.mobileTranBankSaving == "CIMBT") {
+                                Constant.BankAccSaving = "ซีไอเอ็มบี ไทย";
+                              } else if (item.mobileTranBankSaving == "GSB") {
+                                Constant.BankAccSaving = "ออมสิน";
+                              } else if (item.mobileTranBankSaving == "ICBS") {
+                                Constant.BankAccSaving = "ไอซีบีซี (ไทย)";
+                              } else if (item.mobileTranBankSaving == "KBANK") {
+                                Constant.BankAccSaving = "กสิกรไทย";
+                              } else if (item.mobileTranBankSaving == "KK") {
+                                Constant.BankAccSaving = "เกียรตินาคินภัทร";
+                              } else if (item.mobileTranBankSaving == "KTB") {
+                                Constant.BankAccSaving = "กรุงไทย";
+                              } else if (item.mobileTranBankSaving == "LH") {
+                                Constant.BankAccSaving = "แลนด์ แอนด์ เฮ้าส์";
+                              } else if (item.mobileTranBankSaving == "SCB") {
+                                Constant.BankAccSaving = "ไทยพาณิชย์";
+                              } else if (item.mobileTranBankSaving == "TISCO") {
+                                Constant.BankAccSaving = "ทิสโก้";
+                              } else if (item.mobileTranBankSaving == "TTB") {
+                                Constant.BankAccSaving = "ทหารไทยธนชาต";
+                              } else if (item.mobileTranBankSaving == "UOB") {
+                                Constant.BankAccSaving = "ยูโอบี";
+                              } else {
+                                Constant.BankAccSaving = "";
+                              }
+
+                              checkWaitingApprovalMobileAppPayment(
+                                  item.savingId, item.branchName, context);
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) => UploadSlipPagePage(),
+                              //     ));
+                            },
+                            child: Row(
+                              children: [
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.add_circle,
+                                    color: Constant.PRIMARY_COLOR,
+                                  ),
+                                ),
+                                Text(
+                                  "เพิ่มเงินออม",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Constant.PRIMARY_COLOR,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                        onPressed: () {
-                        Constant.MobileAppPaymentBranchName = item.branchName;
-                        Constant.MobileAppPaymentCustId = Constant.CUSTID;
-                        Constant.MobileAppPaymentType = "ออมทอง";
-                        Constant.MobileAppPaymentBillId = item.savingId;
-                        Constant.BankAcctNameSaving =
-                            item.mobileTranBankAcctNameSaving;
-                        Constant.BankAcctNoSaving =
-                            item.mobileTranBankAcctNoSaving;
-
-                        if (item.mobileTranBankSaving == "BAY") {
-                          Constant.BankAccSaving = "กรุงศรีอยุธยา";
-                        } else if (item.mobileTranBankSaving == "BAAC") {
-                          Constant.BankAccSaving = "ธ.ก.ส";
-                        } else if (item.mobileTranBankSaving == "BBL") {
-                          Constant.BankAccSaving = "กรุงเทพ";
-                        } else if (item.mobileTranBankSaving == "CIMBT") {
-                          Constant.BankAccSaving = "ซีไอเอ็มบี ไทย";
-                        } else if (item.mobileTranBankSaving == "GSB") {
-                          Constant.BankAccSaving = "ออมสิน";
-                        } else if (item.mobileTranBankSaving == "ICBS") {
-                          Constant.BankAccSaving = "ไอซีบีซี (ไทย)";
-                        } else if (item.mobileTranBankSaving == "KBANK") {
-                          Constant.BankAccSaving = "กสิกรไทย";
-                        } else if (item.mobileTranBankSaving == "KK") {
-                          Constant.BankAccSaving = "เกียรตินาคินภัทร";
-                        } else if (item.mobileTranBankSaving == "KTB") {
-                          Constant.BankAccSaving = "กรุงไทย";
-                        } else if (item.mobileTranBankSaving == "LH") {
-                          Constant.BankAccSaving = "แลนด์ แอนด์ เฮ้าส์";
-                        } else if (item.mobileTranBankSaving == "SCB") {
-                          Constant.BankAccSaving = "ไทยพาณิชย์";
-                        } else if (item.mobileTranBankSaving == "TISCO") {
-                          Constant.BankAccSaving = "ทิสโก้";
-                        } else if (item.mobileTranBankSaving == "TTB") {
-                          Constant.BankAccSaving = "ทหารไทยธนชาต";
-                        } else if (item.mobileTranBankSaving == "UOB") {
-                          Constant.BankAccSaving = "ยูโอบี";
-                        } else {
-                          Constant.BankAccSaving = "";
-                        }
-
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => UploadSlipPagePage(),
-                            ));
-                      },
-                      ),
-                  ],
-                ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 10),
             ],
@@ -381,5 +444,42 @@ _launchLine() async {
   throw 'Could not launch url';
 }
 
-
+void showDialogWaiting(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    // false = user must tap button, true = tap outside dialog
+    builder: (BuildContext dialogContext) {
+      return AlertDialog(
+        content: Container(
+          height: 250,
+          child: Column(
+            children: [
+              Image.asset(
+                "assets/images/waiting.png",
+                height: 250,
+                width: 250,
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text(
+              'ตกลง',
+              style: TextStyle(
+                fontSize: 20,
+                color: Constant.FONT_COLOR_MENU,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onPressed: () {
+              Navigator.of(dialogContext).pop(); // Dismiss alert dialog
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
 
